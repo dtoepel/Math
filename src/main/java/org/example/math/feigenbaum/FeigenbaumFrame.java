@@ -26,8 +26,8 @@ public class FeigenbaumFrame extends JFrame {
 
     private double minX = 2.9;
     private double maxX = 4.0;
-    private double minY = 1.0;
-    private double maxY = 0.0;
+    private final double minY = 1.0;
+    private final double maxY = 0.0;
     private int currentX = -1;
     private int currentY = -1;
 
@@ -102,11 +102,10 @@ public class FeigenbaumFrame extends JFrame {
             }
 
             private double getX(int i) {
-                return (maxX - minX) * i / (W*4/5) + minX;
+                return ((maxX - minX) * i / W + minX);
             }
 
-            private double getY(int i) {
-                return (maxY - minY) * i / (H*4/5) + minY;
+            private double getY(int i) { return ((maxY - minY) * i / H + minY);
             }
         };
 
@@ -115,8 +114,8 @@ public class FeigenbaumFrame extends JFrame {
             @Override
             public void mouseMoved(MouseEvent e) {
                 super.mouseMoved(e);
-                currentX = e.getX();
-                currentY = e.getY();
+                currentX = e.getX()*5/4;
+                currentY = e.getY()*5/4;
                 repaint();
             }
 

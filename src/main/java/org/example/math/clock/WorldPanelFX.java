@@ -11,20 +11,18 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.temporal.TemporalAccessor;
 import java.util.*;
 
 public class WorldPanelFX extends Pane {
     private Image day = null;
     private Image night = null;
     private long t = System.currentTimeMillis();
-    private int yMax = 512;
-    private int xMax = yMax * 2;
-    private Canvas canvas;
+    private final int yMax = 512;
+    private final int xMax = yMax * 2;
+    private final Canvas canvas;
     private boolean flatEarthMode = false;
     private boolean flatSouth = true;
     private boolean showSubSolar;
@@ -37,9 +35,6 @@ public class WorldPanelFX extends Pane {
 
     public WorldPanelFX() {
         try {
-            //day = ImageIO.read(new File(WorldPanel.class.getResource("/images/day1024.jpg").getFile()));
-            //night = ImageIO.read(new File(WorldPanel.class.getResource("/images/night1024.jpg").getFile()));
-
             day = new Image(new File(WorldPanel.class.getResource("/images/day1024.jpg").getFile()).toURI().toString());
             night = new Image(new File(WorldPanel.class.getResource("/images/night1024.jpg").getFile()).toURI().toString());
         } catch (Exception e) {
@@ -61,18 +56,6 @@ public class WorldPanelFX extends Pane {
         this.setMinWidth(xMax);
 
         Platform.runLater(() -> {redraw();});
-        //Platform.runLater(() -> {
-        /*Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> {
-                    t += (int) (Math.pow(2,speed) * ANIM_SPEED);
-                    redraw();
-                    if(controlPanel != null) controlPanel.updateFields();
-                });
-            }
-        }, 1000, ANIM_SPEED);//});*/
 
         setOnMouseMoved(e->{mouseMoved();});
     }
@@ -106,9 +89,9 @@ public class WorldPanelFX extends Pane {
                 yMax/2 und xMax/2 sind Ursprung,
                 radius ist yMax/2, weil kleiner als xMax;
                 */
-                double radius =  yMax/2;
-                double xFlat = (x - xMax/2) / radius;
-                double yFlat = - (y - yMax/2) / radius;
+                double radius =  yMax/2.;
+                double xFlat = (x - xMax/2.) / radius;
+                double yFlat = - (y - yMax/2.) / radius;
 
                 if(xFlat*xFlat + yFlat*yFlat < 1) {
                     double flatLat = // nord = 1, süd = -1;
@@ -179,7 +162,6 @@ public class WorldPanelFX extends Pane {
     private double getTimeSinceWinterSolstice(long t2) {
         GregorianCalendar cal = new GregorianCalendar();
         cal.setTime(new Date(t));
-        //System.out.println(new SimpleDateFormat().format(cal.getTime()));
         cal.set(cal.get(Calendar.YEAR), Calendar.DECEMBER, 21, 12, 0, 0);
         long lastEquinox = cal.getTimeInMillis();
         if(lastEquinox > t) {
@@ -202,7 +184,6 @@ public class WorldPanelFX extends Pane {
     }
 
     public ZonedDateTime getTime() {
-        //System.err.println("getTime");
         return ZonedDateTime.ofInstant(Instant.ofEpochMilli(t), ZoneId.systemDefault());
     }
 

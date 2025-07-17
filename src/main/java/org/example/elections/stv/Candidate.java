@@ -21,8 +21,8 @@ public class Candidate {
 
         @Override
         public int compare(Candidate c1, Candidate c2) {
-            if(count.voteCount.get(c1) > count.voteCount.get(c2)) return 1;
-            if(count.voteCount.get(c1) < count.voteCount.get(c2)) return -1;
+            if(count.voteCount().get(c1) > count.voteCount().get(c2)) return 1;
+            if(count.voteCount().get(c1) < count.voteCount().get(c2)) return -1;
             if(c1.random > c2.random) return 1;
             if(c1.random < c2.random) return -1;
             return 0;
