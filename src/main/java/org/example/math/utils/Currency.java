@@ -11,8 +11,8 @@ import java.util.HashMap;
 public class Currency {
     private static boolean success = false;
     private static boolean trying = false;
-    private static HashMap<String, Double> rates = new HashMap<>();
-    private static HashMap<String, String> names = new HashMap<>();
+    private final static HashMap<String, Double> rates = new HashMap<>();
+    private final static HashMap<String, String> names = new HashMap<>();
 
     private final String id;
     private final String name;
@@ -39,14 +39,10 @@ public class Currency {
         return new Currency(id, name, rates.get(id));
     }
 
-    public String getId() {
-        return id;
-    }
-
+    public String getId() {return id;}
     public String getName() {
         return name;
     }
-
     public Double getPriceInEUR() {
         return price;
     }
@@ -57,6 +53,9 @@ public class Currency {
         }
     }
 
+    /**
+     * Inits the list of currencies and returns after the current rates have been fetched
+     */
     public static void initWait() {
         if(rates.isEmpty()) {
             getRates();
