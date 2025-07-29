@@ -2,7 +2,7 @@ package org.example.elections.stv;
 
 import java.awt.*;
 
-public class Party {
+public class Party implements Aligned {
     private final Alignment alignment;
     private final String name;
     private final String shortName;

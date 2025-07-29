@@ -64,7 +64,7 @@ public class MeekAlgorithm {
         Vector<Candidate> hopefulCandidates = new Vector<>();
         for(Candidate c : candidates) if (c.status == CandidateStatus.HOPEFUL) hopefulCandidates.add(c);
 
-        hopefulCandidates.sort(new Candidate.Sorter(count));
+        hopefulCandidates.sort(new Candidate.VoteSorter(count));
         hopefulCandidates.getFirst().status = CandidateStatus.EXCLUDED;
         hopefulCandidates.getFirst().weight = 0.0;
 

@@ -9,16 +9,16 @@ public class Example1 {
     public static void main(String[] args) {
         Election election = new Election();
 
-        Candidate c0 = new Candidate("Gloria Stevens", null);
-        Candidate c1 = new Candidate("Denise Wilson", null);
-        Candidate c2 = new Candidate("Ethan Turner", null);
-        Candidate c3 = new Candidate("Michael Murphy", null);
-        Candidate c4 = new Candidate("Sandra Thompson", null);
-        Candidate c5 = new Candidate("Jessica Murphy", null);
-        Candidate c6 = new Candidate("Carol White", null);
-        Candidate c7 = new Candidate("Jason Jones", null);
-        Candidate c8 = new Candidate("Douglas Shaw", null);
-        Candidate c9 = new Candidate("Olivia Lee", null);
+        Candidate c0 = new Candidate("Gloria Stevens", Alignment.random());
+        Candidate c1 = new Candidate("Denise Wilson", Alignment.random());
+        Candidate c2 = new Candidate("Ethan Turner", Alignment.random());
+        Candidate c3 = new Candidate("Michael Murphy", Alignment.random());
+        Candidate c4 = new Candidate("Sandra Thompson", Alignment.random());
+        Candidate c5 = new Candidate("Jessica Murphy", Alignment.random());
+        Candidate c6 = new Candidate("Carol White", Alignment.random());
+        Candidate c7 = new Candidate("Jason Jones", Alignment.random());
+        Candidate c8 = new Candidate("Douglas Shaw", Alignment.random());
+        Candidate c9 = new Candidate("Olivia Lee", Alignment.random());
 
         election.addCandidate(c0);
         election.addCandidate(c1);
@@ -43,5 +43,15 @@ public class Example1 {
         election.addParty(grayParty);
 
         election.assignPartyToCandidates();
+
+        for(int i = 0; i < 100; i++) {
+            Alignment a = Alignment.random();
+            Voter voter = new Voter(a);
+            election.addVoter(voter);
+        }
+
+        election.holdElection(4);
+
+
     }
 }
