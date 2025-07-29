@@ -1,0 +1,11 @@
+package org.example.elections.stv;
+
+public enum Dimension {
+    LEFT_RIGHT,
+    INTERNATIONAL_NATIONAL,
+    FOSSILE_GREEN,
+    LIBERAL_CONSERVATIVE,
+    AUTHORITARIAN_DEMOCRATIC,
+    RELIGIOUS_SECULAR,
+    UNIONIST_SEPARATIST
+}

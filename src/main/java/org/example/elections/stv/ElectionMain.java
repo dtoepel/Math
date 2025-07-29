@@ -7,12 +7,12 @@ public class ElectionMain {
         Vector<Candidate> candidates = new Vector<>();
         Vector<Vote> votes = new Vector<>();
 
-        Candidate ALICE = new Candidate("Alice");
-        Candidate BOB = new Candidate("Bob");
-        Candidate CHARLIE = new Candidate("Charlie");
-        Candidate DAVE = new Candidate("Dave");
-        Candidate ERIN = new Candidate("Erin");
-        Candidate FAYTHE = new Candidate("Faythe");
+        Candidate ALICE = new Candidate("Alice", null);
+        Candidate BOB = new Candidate("Bob", null);
+        Candidate CHARLIE = new Candidate("Charlie", null);
+        Candidate DAVE = new Candidate("Dave", null);
+        Candidate ERIN = new Candidate("Erin", null);
+        Candidate FAYTHE = new Candidate("Faythe", null);
         candidates.add(ALICE);
         candidates.add(BOB);
         candidates.add(CHARLIE);

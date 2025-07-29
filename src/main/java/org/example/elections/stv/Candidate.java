@@ -3,14 +3,21 @@ package org.example.elections.stv;
 import java.util.Comparator;
 
 public class Candidate {
-    public Candidate(String name) {
+
+    public Candidate(String name, Alignment alignment) {
         this.name = name;
         this.random= Math.random();
     }
+
     public transient double weight = 1.0;
     public transient CandidateStatus status = CandidateStatus.HOPEFUL;
-    public String name;
+    public final String name;
     public double random;
+    private Alignment alignment;
+
+    public Alignment getAlignment() {
+        return alignment;
+    }
 
     public static class Sorter implements Comparator<Candidate> {
         private Count count;
