@@ -60,8 +60,8 @@ public class NewtonFrame extends JFrame {
         nullstellen.add(new Complex(3, 4));
         nullstellen.add(new Complex(3, -4));
         nullstellen.add(new Complex(-5, 0));
-        nullstellen.add(new Complex(-6, 5));
-        nullstellen.add(new Complex(0, 10));
+        nullstellen.add(new Complex(-6, 3));
+        nullstellen.add(new Complex(0, 3));
 //		nullstellen.add(Complex.NULL);
 
         p0 = Polynom.EINS;

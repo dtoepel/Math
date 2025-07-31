@@ -10,6 +10,10 @@ public class Vote {
         ranking.addAll(Arrays.asList(candidates));
     }
 
+    public Vote(Vector<Candidate> candidates) {
+        ranking = new Vector<>(candidates);
+    }
+
     public Vote(double amount, Candidate... candidates) {
         ranking = new Vector<>();
         ranking.addAll(Arrays.asList(candidates));

@@ -34,6 +34,10 @@ public class JPanelUnScaled extends JPanel{
         return screenScale.transform(new Point2D.Double(e.getX(),e.getY()), null);
     }
 
+    protected final Point2D transformPoint(Point2D e) {
+        return screenScale.transform(new Point2D.Double(e.getX(),e.getY()), null);
+    }
+
     protected final int getCanvasWidth() {
         return (int)(screenScale.getScaleX() * getWidth());
     }

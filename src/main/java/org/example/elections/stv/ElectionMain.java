@@ -7,12 +7,12 @@ public class ElectionMain {
         Vector<Candidate> candidates = new Vector<>();
         Vector<Vote> votes = new Vector<>();
 
-        Candidate ALICE = new Candidate("Alice");
-        Candidate BOB = new Candidate("Bob");
-        Candidate CHARLIE = new Candidate("Charlie");
-        Candidate DAVE = new Candidate("Dave");
-        Candidate ERIN = new Candidate("Erin");
-        Candidate FAYTHE = new Candidate("Faythe");
+        Candidate ALICE = new Candidate("Alice", null);
+        Candidate BOB = new Candidate("Bob", null);
+        Candidate CHARLIE = new Candidate("Charlie", null);
+        Candidate DAVE = new Candidate("Dave", null);
+        Candidate ERIN = new Candidate("Erin", null);
+        Candidate FAYTHE = new Candidate("Faythe", null);
         candidates.add(ALICE);
         candidates.add(BOB);
         candidates.add(CHARLIE);
@@ -34,17 +34,8 @@ public class ElectionMain {
         System.out.println("\nAgain 3 seats, but with a seat guaranteed for Alice:");
         m.reset();
         ALICE.status=CandidateStatus.ELECTED;
-        m.perform();
 
-        /*Vector<Vote> votes2 = new Vector<>();
-        for(int i = 0; i < 3; i++)  votes2.add(new Vote(ALICE));
-        for(int i = 0; i < 3; i++)  votes2.add(new Vote(BOB));
-        for(int i = 0; i < 2; i++)  votes2.add(new Vote(BOB,ALICE));
-        MeekAlgorithm m2 = new MeekAlgorithm(candidates, votes2, 1);
-        m2.setDebug(true);
-        m2.setMinApproval(2./3);
-        m2.perform();*/
-
-
+        while(!m.performAsync()) {}
+        m.printVoteCount();
     }
 }
