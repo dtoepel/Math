@@ -6,16 +6,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Alignment {
-    private final double SPEED = .9;
+    private final double SPEED = .3;
     private final Ranker ranker = new Ranker();
 
     private final HashMap<Dimension, Double> values = new HashMap<>();
 
     public static Alignment random() {
         Alignment a = new Alignment();
-        a.setAlignment(Dimension.LEFT_RIGHT, Math.random()*2-1);
-        a.setAlignment(Dimension.LIBERAL_CONSERVATIVE, Math.random()*2-1);
         a.setAlignment(Dimension.FOSSILE_GREEN, Math.random()*2-1);
+        a.setAlignment(Dimension.SOCIAL_INDIVIDUAL, Math.random()*2-1);
+        a.setAlignment(Dimension.RELIGIOUS_SECULAR, Math.random()*2-1);
+        a.setAlignment(Dimension.UNIONIST_SEPARATIST, Math.random()*2-1);
+        a.setAlignment(Dimension.LIBERAL_CONSERVATIVE, Math.random()*2-1);
+        a.setAlignment(Dimension.INTERNATIONAL_NATIONAL, Math.random()*2-1);
+        a.setAlignment(Dimension.AUTHORITARIAN_DEMOCRATIC, Math.random()*2-1);
+        a.setAlignment(Dimension.UNPOPULAR_POPULAR, 0);
         return a;
     }
 
@@ -37,9 +42,25 @@ public class Alignment {
             double thisWeight = this.values.getOrDefault(dimension, 0.);
             double thatWeight = that.values.getOrDefault(dimension, 0.);
             double diff = .5 * Math.abs(thisWeight - thatWeight);
-            alignsWith *= (1.-Math.pow(diff, SPEED));
+            alignsWith *= (1.- diff * SPEED); // between 1-SPEED and 1
+            //alignsWith *= (1.-Math.pow(diff, SPEED));
         }
         return alignsWith;
+    }
+
+    public Alignment mix(Alignment that, double otherShare) {
+        Set<Dimension> dimensions = new HashSet<>(this.values.keySet());
+        Set<Dimension> dimensions2 = new HashSet<>(that.values.keySet());
+        //System.err.println(dimensions);
+        //System.err.println(dimensions2);
+        dimensions.addAll(dimensions2);
+        Alignment result = new Alignment();
+        for(Dimension dimension : dimensions) {
+            result.values.put(dimension,
+                    this.values.getOrDefault(dimension,0.) * (1-otherShare) +
+                    that.values.getOrDefault(dimension,0.) * (otherShare));
+        }
+        return result;
     }
 
     public class Ranker implements Comparator<Aligned> {
@@ -51,5 +72,29 @@ public class Alignment {
             Double c2A = c2.getAlignment().alignsWith(Alignment.this);
             return -c1A.compareTo(c2A);
         }
+    }
+
+    public Alignment() {
+        setAlignment(Dimension.UNPOPULAR_POPULAR, 0);
+    }
+
+    private Alignment(Alignment original) {
+        for(Dimension dim : original.values.keySet()) {
+            values.put(dim, original.values.get(dim));
+        }
+    }
+
+    public Alignment withAbs(Dimension dim, double val) {
+        Alignment a = new Alignment(this);
+        a.setAlignment(dim, val);
+        return a;
+    }
+
+    public Alignment withRel(Dimension dim, double val) {
+        Alignment a = new Alignment(this);
+        double oldVal = values.get(dim);
+        double div = Math.max(1, 1 + val * oldVal);
+        a.setAlignment(dim, (val+oldVal)/div);
+        return a;
     }
 }

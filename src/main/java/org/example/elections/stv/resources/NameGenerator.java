@@ -60,6 +60,10 @@ public class NameGenerator {
             "Wilkinson","Foster","Chapman","Powell","Webb","Rogers","Gray","Mason","Ali","Hunt","Hussain","Campbell","Matthews","Owen","Palmer",
             "Holmes","Mills","Barnes","Knight","Lloyd","Butler","Russell","Barker","Fisher","Stevens","Jenkins","Murray","Dixon","Harvey"};
 
+    public static void main(String[] args) {
+        System.out.println(getRandomName());
+    }
+
     public static String getRandomName() {
         Vector<String> names = new Vector<>();
         names.addAll(Arrays.asList(maleNames));

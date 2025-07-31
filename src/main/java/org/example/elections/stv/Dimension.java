@@ -1,7 +1,8 @@
 package org.example.elections.stv;
 
 public enum Dimension {
-    LEFT_RIGHT,
+    UNPOPULAR_POPULAR,
+    SOCIAL_INDIVIDUAL,
     INTERNATIONAL_NATIONAL,
     FOSSILE_GREEN,
     LIBERAL_CONSERVATIVE,
